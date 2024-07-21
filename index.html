@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EB Bill Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            margin-top: 200px;
+        }
+        h1 {    
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        input[type="number"] {
+            width: 500px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: forestgreen;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: darkgreen;
+        }
+        
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        
+        p#max {
+            color: #28a745;
+        }
+        
+        p#min {
+            color: #dc3545;
+        }
+        
+        p#avg {
+            color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>EB BILL CALCULATOR</h1>
+    <input type="number" placeholder="Enter amount JAN - FEB" id = "m1"><br> 
+    <input type="number" placeholder="Enter amount MAR - APR" id = "m2"><br>
+    <input type="number" placeholder="Enter amount MAY - JUN" id = "m3"><br>
+    <input type="number" placeholder="Enter amount JUL - AUG" id = "m4"><br>
+    <input type="number" placeholder="Enter amount SEP - OCT" id = "m5"><br>
+    <input type="number" placeholder="Enter amount NOV - DEC" id = "m6"><br>
+
+    <button id = "cal" onclick="calculate()">Calculate</button>
+
+    <p id = "max"></p>
+    <p id = "min"></p>
+    <p id = "avg"></p>
+    </div>
+    <script>
+        function calculate(){
+            let arr = [];
+            for(let i = 1; i <= 6; i++){
+                let value = document.querySelector("#m" + i).value;
+                arr.push(Number(value));
+            }
+            arr.sort((a, b) => a - b);
+
+            let maximum = document.querySelector("#max");
+            maximum.textContent = "Maximum: ₹" + arr[arr.length-1];
+
+            let minimum = document.querySelector("#min");
+            minimum.textContent = "Minimum: ₹" + arr[0];
+
+            let average = document.querySelector("#avg");
+            let sum = 0;
+            for(let i = 0; i < arr.length; i++){
+                sum += arr[i]; // sum = sum + arr[i]
+            }
+            let a = sum / arr.length;
+            average.textContent = "Average: ₹" + a.toFixed(3);
+        }
+    </script>
+</body>
+</html>
